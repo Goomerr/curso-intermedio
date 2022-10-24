@@ -1,5 +1,7 @@
 import { styled } from "goober";
 import { CSSProperties } from "react";
+import { emittedId } from "../events/selected";
+
 
 const Container = styled("div")<{ visible: boolean }>`
   display: flex;
@@ -82,8 +84,11 @@ export interface params {
 
 function App(params: params): JSX.Element {
 
-  const handleClick = () => typeof params.onClick === 'function' && params.onClick(params.id);
-  
+  const handleClick = () => {
+
+    emittedId(params.id)
+
+}
   return (
     <Container
       className="container"

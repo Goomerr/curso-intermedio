@@ -1,4 +1,6 @@
 import { styled } from "goober";
+import { emittedId } from "./events/selected";
+import Listener from "./listener";
 
 import Card from "./aleatorio";
 import useSelect from "./hooks/useSelect";
@@ -13,14 +15,17 @@ const Container = styled("div")`
 `;
 
 function App(): JSX.Element {
+  const { data } = useSelect();
 
-  const {data, handleClick}= useSelect();
- 
+  const handleSelectDefault = () => emittedId(data[0].title);
+
   return (
     <Container>
       {data.map((v, i) => (
-        <Card key={i} {...v} id={v.id} onClick={handleClick} />
+        <Card key={i} {...v} id={v.title} />
       ))}
+      <button onClick={handleSelectDefault}>Hola</button>
+      <Listener />
     </Container>
   );
 }
